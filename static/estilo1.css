@@ -1,0 +1,50 @@
+.logovet {
+    width: 300px;
+    height: 150px;
+}
+
+.carousel-inner img {
+    width: 100%;
+    max-height: 500px;
+}
+
+.carousel-inner {
+    height: 500px;
+}
+
+body {
+    background-color: #B3F4F7;
+}
+
+.portada {
+    padding: 6%;
+}
+
+.portada p {
+    text-align: justify;
+    padding: 0 10%;
+
+
+}
+
+.portada h3 {
+    text-align: center;
+
+}
+
+.localfoto {
+    padding-left: 20px;
+    padding: 1em;
+    width: 400px;
+    height: 480px;
+}
+
+.loginpad {
+    margin: 1;
+    padding: 3em;
+    background: white;
+}
+
+footer {
+    background: white;
+}
