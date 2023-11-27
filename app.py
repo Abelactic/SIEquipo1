@@ -45,7 +45,7 @@ def Acceso():
         if account:
             session['logueado'] = True
             session['id'] = account[0]
-
+            flash('Bienvenido al sistema')
             return redirect(url_for('Main'))
         else:
 
@@ -58,7 +58,6 @@ def Main():
     cur = mysql.connection.cursor()
     cur.execute('SELECT * FROM datosdecita')
     data = cur.fetchall()
-    flash('Bienvenido al sistema')
     return render_template('mainvet.html', citas=data)
 
 
