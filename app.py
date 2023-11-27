@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_mysqldb import MySQL
+from flask import Flask, render_template, request, redirect, url_for, flash, Response, session
+from flask_mysqldb import MySQL, MySQLdb
+
 
 app = Flask(__name__)
 
@@ -8,6 +9,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'password1'
 app.config['MYSQL_DB'] = 'citas_vet'
+
 
 mysql = MySQL(app)
 
@@ -27,6 +29,28 @@ def Citas():
 @app.route('/login')
 def Login():
     return render_template('login.html')
+
+
+@app.route('/acceso-login', methods={"GET", "POST"})
+def Acceso():
+    if request.method == 'POST' and 'username' in request.form and 'password':
+        username = request.form['username']
+        password = request.form['password']
+
+        cur = mysql.connection.cursor()
+        cur.execute(
+            'SELECT * FROM veterinarios WHERE correovet = %s AND passvet = %s', (username, password,))
+        account = cur.fetchone()
+
+        if account:
+            session['logueado'] = True
+            session['id'] = account[0]
+
+            return redirect(url_for('Main'))
+        else:
+
+            flash('Usuario incorrecto')
+            return render_template('login.html')
 
 
 @app.route('/main')
