@@ -58,6 +58,7 @@ def Main():
     cur = mysql.connection.cursor()
     cur.execute('SELECT * FROM datosdecita')
     data = cur.fetchall()
+    flash('Bienvenido al sistema')
     return render_template('mainvet.html', citas=data)
 
 
