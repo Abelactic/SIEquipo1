@@ -111,13 +111,21 @@
     <div class="row">
         <div class="col-6 portada">
             <h3 class="mb-3">Haz tu cita con nosotros!</h3>
-            <img class="localfoto" src="{{url_for('static',filename='serviciosimg.jpg')}}">
-            <button type="button" class="btn btn-light"><a href="{{url_for('Citas')}}">Haz tu cita</a></button>
+            <div style="text-align: center;">
+                <img class="localfoto" src="{{url_for('static',filename='serviciosvet.jpeg')}}">
+            </div><br>
+            <div style="text-align: center;">
+                <button type="button" class="btn btn-light"><a href="{{url_for('Citas')}}">Haz tu cita</a></button>
+            </div>
         </div>
         <div class="col-6 portada">
             <h3 class="mb-3">Galeria de amigos</h3>
-            <img class="localfoto" src="{{url_for('static',filename='galeriaimg.jpg')}}">
-            <button type="button" class="btn btn-light">Visitar Galeria</button>
+            <div style="text-align: center;">
+                <img class="localfoto" src="{{url_for('static',filename='galeriaimg.jpg')}}">
+            </div><br>
+            <div style="text-align: center;">
+                <button type="button" class="btn btn-light">Visitar Galeria</button>
+            </div>
         </div>
     </div>
 

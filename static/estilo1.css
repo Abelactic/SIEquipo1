@@ -17,6 +17,7 @@ body {
 }
 
 .portada {
+    margin: auto;
     padding: 6%;
 }
 
@@ -33,10 +34,11 @@ body {
 }
 
 .localfoto {
-    padding-left: 20px;
+    margin: auto;
     padding: 1em;
     width: 400px;
     height: 480px;
+    margin-left: 20px;
 }
 
 .loginpad {

@@ -31,7 +31,10 @@ def Login():
 
 @app.route('/main')
 def Main():
-    return render_template('mainvet.html')
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM datosdecita')
+    data = cur.fetchall()
+    return render_template('mainvet.html', citas=data)
 
 
 @app.route('/agendar_cita', methods=['POST'])
@@ -49,6 +52,48 @@ def agendar_cita():
         mysql.connection.commit()
         flash('Datos guardados!')
         return redirect(url_for('Citas'))
+
+
+@app.route('/eliminar/<string:id>')
+def eliminar(id):
+    cur = mysql.connection.cursor()
+    cur.execute('DELETE FROM datosdecita WHERE id = %s', (id,))
+    mysql.connection.commit()
+    flash('Cita Eliminada')
+    return redirect(url_for('Main'))
+
+
+@app.route('/editarcita/<id>')
+def get_cita(id):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM datosdecita WHERE id = %s', (id,))
+    data = cur.fetchall()
+    return render_template('mainedit.html', cita=data[0])
+
+
+@app.route('/update/<id>', methods=['POST'])
+def update_cita(id):
+    if request.method == 'POST':
+        nomapellido = request.form['nomapellido']
+        telefono = request.form['telefono']
+        correo = request.form['correo']
+        mascota = request.form['mascota']
+        motivo = request.form['motivo']
+        fecha = request.form['fecha']
+        cur = mysql.connection.cursor()
+        cur.execute("""
+            UPDATE datosdecita
+            SET nomapellido = %s,
+                telefono = %s,
+                correo = %s,
+                mascota = %s,
+                motivo = %s,
+                fecha = %s
+            WHERE id = %s
+            """, (nomapellido, telefono, correo, mascota, motivo, fecha, id))
+        mysql.connection.commit()
+        flash('Cita actualizada con éxito')
+        return redirect(url_for('Main'))
 
 
 if __name__ == '__main__':
